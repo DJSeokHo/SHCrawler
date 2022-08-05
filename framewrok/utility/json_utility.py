@@ -12,6 +12,10 @@ class JSONUtility:
         return json.loads(json_object_str)
 
     @staticmethod
+    def to_json_array(json_array_str) -> list:
+        return json.loads(json_array_str)
+
+    @staticmethod
     def parsing_str(json_object: dict, key: str, default_value: str = "") -> str:
         try:
             return json_object[key]
