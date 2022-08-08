@@ -16,36 +16,40 @@ class JSONUtility:
         return json.loads(json_array_str)
 
     @staticmethod
-    def parsing_str(json_object: dict, key: str, default_value: str = "") -> str:
+    def parsing_str(the_json_object: dict, key: str, default_value: str = "") -> str:
         try:
-            return json_object[key]
-        except:
+            return the_json_object[key]
+        except Exception as e:
+            ILog.debug(__file__, e)
             return default_value
 
     @staticmethod
-    def parsing_int(json_object: dict, key: str, default_value: int = "") -> int:
+    def parsing_int(the_json_object: dict, key: str, default_value: int = "") -> int:
         try:
-            return json_object[key]
-        except:
+            return the_json_object[key]
+        except Exception as e:
+            ILog.debug(__file__, e)
             return default_value
 
     @staticmethod
-    def parsing_float(json_object: dict, key: str, default_value: float = "") -> float:
+    def parsing_float(the_json_object: dict, key: str, default_value: float = "") -> float:
         try:
-            return json_object[key]
-        except:
+            return the_json_object[key]
+        except Exception as e:
+            ILog.debug(__file__, e)
             return default_value
 
     @staticmethod
-    def parsing_bool(json_object: dict, key: str, default_value: bool = "") -> bool:
+    def parsing_bool(the_json_object: dict, key: str, default_value: bool = "") -> bool:
         try:
-            return json_object[key]
-        except:
+            return the_json_object[key]
+        except Exception as e:
+            ILog.debug(__file__, e)
             return default_value
 
     @staticmethod
-    def to_json_string(json_object: dict) -> str:
-        return json.dumps(json_object)
+    def to_json_string(the_json_object: dict) -> str:
+        return json.dumps(the_json_object)
 
 
 if __name__ == '__main__':
