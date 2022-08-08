@@ -12,16 +12,17 @@ from urllib.error import URLError, HTTPError
 
 from framewrok.utility.log_utility import ILog
 
-ssl._create_default_https_context = ssl._create_unverified_context
-
 
 class ResponseObject:
+
     __data: str = ""
     __code: int = 0
     __process_time: str = 0
     __url: str = ""
     __message: str = ""
     __error: str = ""
+
+    ssl._create_default_https_context = ssl._create_unverified_context
 
     def __init__(self, data: str, code: int, process_time: str, url: str, message: str, error: str):
         self.__data = data
@@ -40,6 +41,9 @@ class ResponseObject:
         dictionary.update({"message": self.__message})
         dictionary.update({"error": self.__error})
         return dictionary
+
+    def get_data(self) -> str:
+        return self.__data
 
 
 class UrlLibUtility:
