@@ -7,7 +7,7 @@ import random
 
 from bs4 import BeautifulSoup
 
-from framewrok.utility.urllib_utility import UrlLibUtility
+from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 
 
 class ProxyModel:
@@ -35,7 +35,7 @@ class ProxyModel:
     def get_https(self) -> str:
         return self.__https
 
-    def to_proxy(self) -> dict:
+    def to_proxy_dict(self) -> dict:
 
         return {
             'https': f'{self.__ip}:{self.__port}'
@@ -46,9 +46,8 @@ class ProxiesUtility:
 
     @staticmethod
     def get_ssl_proxy() -> ProxyModel:
-        url = 'https://www.sslproxies.org/'
 
-        headers = {
+        response_object = UrlLibWrapper().url('https://www.sslproxies.org/').headers({
             "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,"
                       "*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             # "accept-encoding": "gzip, deflate, br",
@@ -64,9 +63,7 @@ class ProxiesUtility:
             "upgrade-insecure-requests": "1",
             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/104.0.0.0 Safari/537.36 "
-        }
-
-        response_object = UrlLibUtility.get(url, headers=headers)
+        }).response()
 
         soup = BeautifulSoup(response_object.get_data(), 'html5lib')
         tr_tag_list = soup.select('table[class="table table-striped table-bordered"] tbody tr', limit=10)

@@ -3,14 +3,12 @@
 # @Author : Coding with cat
 # @File : beautiful_demo
 # @Project : SHCrawler
-import random
 
 from bs4 import BeautifulSoup
 
-
+from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 from framewrok.utility.log_utility import ILog
 from framewrok.utility.proxies_utility import ProxiesUtility
-from framewrok.utility.urllib_utility import UrlLibUtility
 
 
 def __test_1():
@@ -72,16 +70,7 @@ def __test_1():
 def __test_2():
     # beautiful soup 采集星巴克
 
-    url = 'https://www.starbucks.com.cn/menu/'
-
-    '''
-    网站采取了强缓存验证， 服务器将要爬取的内容在本地做了缓存，
-    再次请求的时候，会首先检查本地缓存中是否已存在，如果有就返回304
-    
-    解决方法：
-    在requests headers中，禁用删除If - Modified-Since 和If-None-Natch 这两项，服务器是通过检查这两项来判断是否是已经做了缓存。
-    '''
-    headers = {
+    response_object = UrlLibWrapper().url('https://www.starbucks.com.cn/menu/').headers({
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,"
                   "application/signed-exchange;v=b3;q=0.9",
         # "Accept-Encoding": "gzip, deflate, br",
@@ -99,9 +88,16 @@ def __test_2():
         "Sec-Fetch-Mode": "navigate", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-User": "?1",
         "Upgrade-Insecure-Requests": "1",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
-                      "Chrome/104.0.0.0 Safari/537.36"}
+                      "Chrome/104.0.0.0 Safari/537.36"
+    }).proxies(ProxiesUtility.get_ssl_proxy().to_proxy_dict()).response()
+    '''
+    网站采取了强缓存验证， 服务器将要爬取的内容在本地做了缓存，
+    再次请求的时候，会首先检查本地缓存中是否已存在，如果有就返回304
+    
+    解决方法：
+    在requests headers中，禁用删除If - Modified-Since 和If-None-Natch 这两项，服务器是通过检查这两项来判断是否是已经做了缓存。
+    '''
 
-    response_object = UrlLibUtility.get(url, headers=headers, proxies=ProxiesUtility.get_ssl_proxy().to_proxy())
     ILog.debug(__file__, response_object.get_dictionary())
 
     soup = BeautifulSoup(response_object.get_data(), 'html5lib')
@@ -116,5 +112,3 @@ def __test_2():
 if __name__ == '__main__':
     # __test_1()
     __test_2()
-
-

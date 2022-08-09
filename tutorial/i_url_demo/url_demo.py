@@ -3,14 +3,12 @@
 # @Author : Coding with cat
 # @File : url_demo_baidu
 # @Project : SHCrawler
-import random
 import time
 
-from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper, Method
+from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 from framewrok.utility.json_utility import JSONUtility
 from framewrok.utility.log_utility import ILog
 from framewrok.utility.proxies_utility import ProxiesUtility
-from framewrok.utility.urllib_utility import UrlLibUtility
 
 
 def __test_1():
@@ -267,106 +265,48 @@ def __test_8():
 
 
 def __test_9():
-
-    修改这里
     # 微博cookie绕过登录和详细信息
-    url = "https://weibo.com/ajax/profile/info"
 
-    headers = {
+    response_object = UrlLibWrapper().url('https://weibo.com/ajax/profile/info').headers({
         "accept": "application/json, text/plain, */*",
         # "accept-encoding": "gzip, deflate, br",
-        "accept-language": "zh-CN,zh;q=0.9,ko;q=0.8,zh-TW;q=0.7,en;q=0.6",
-        "client-version": "v2.34.76",
+        "accept-language": "zh-CN,zh;q=0.9,ko;q=0.8,zh-TW;q=0.7,en;q=0.6", "client-version": "v2.34.76",
         "cookie": "login_sid_t=dad79da3fddc0e3fa0f92ea665ee873e; cross_origin_proto=SSL; "
                   "_s_tentry=passport.weibo.com; Apache=2763422235674.613.1652751815618; "
                   "SINAGLOBAL=2763422235674.613.1652751815618; "
-                  "ULV=1652751815621:1:1:1:2763422235674.613.1652751815618:; "
-                  "WBtopGlobal_register_version=2022051709; SSOLoginState=1652751840; "
-                  "XSRF-TOKEN=EL1hfx1JJ9Z743JWhEn1pKrl; "
+                  "ULV=1652751815621:1:1:1:2763422235674.613.1652751815618:; WBtopGlobal_register_version=2022051709; "
+                  "SSOLoginState=1652751840; XSRF-TOKEN=EL1hfx1JJ9Z743JWhEn1pKrl; "
+                  "YF-V-WEIBO-G0=b09171a17b2b5a470c42e2f713edace0; PC_TOKEN=18a87328ef; "
                   "SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KMhUgL"
-                  ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; "
-                  "YF-V-WEIBO-G0=b09171a17b2b5a470c42e2f713edace0; "
-                  "SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv99eiwJLsTrJAeeltV3BTFTprdEDgOmKIMmQd21qlfYQvE"
-                  ".; SUB=_2A25P6LVeDeRhGeVM61IX9i7Lwz6IHXVsn6GWrDV8PUNbmtAfLVjAkW9NTMKiQS3kzMBzozt"
-                  "-dzjsfYS1pN_HEIEM; ALF=1691220109; "
+                  ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; ALF=1691542157; "
+                  "SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv99APg-f3E3AZb_v4cBde5R_nVsBvB-MMNqHQv0Bmglq6Q.; "
+                  "SUB=_2A25P9d9BDeRhGeVM61IX9i7Lwz6IHXVsgreJrDV8PUNbmtAfLXb7kW9NTMKiQYFodLtlgRuwZYiJwZuWEvTf3f1X; "
                   "WBPSESS=s-0NQ4M0QVQpcAEHgxJPBrcZKtb9tN3_hCT0PgdZ2KV-Aw1SBjKwWG3ZPu"
-                  "-q9ekbTW37V9ll6dvnBTDrDnPxMc6JPmwh9vRwUg1MZ2h7yyqL7YtMvI8vZYpOc6-qBHvOdICVIjRX"
-                  "-G1HfgdURmsZnA==",
+                  "-q9ekbTW37V9ll6dvnBTDrDnPxMYc9A8rmxnE1Vv8p3o6pUxs8kLypjPOuM-fQj5W3goE7E-_uUitHiEK-venwV6sjgg==",
         "referer": "https://weibo.com/u/1712572452",
         "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
         "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"macOS\"", "sec-fetch-dest": "empty",
         "sec-fetch-mode": "cors", "sec-fetch-site": "same-origin", "server-version": "v2022.08.03.1",
-        "traceparent": "00-a2d193708e0b0be2b9d887077134039a-074b1727632d0d45-00",
+        "traceparent": "00-57976f325bb490c92387b02f9ca9ab15-358dcf307b5e0f0d-00",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/104.0.0.0 Safari/537.36",
         "x-requested-with": "XMLHttpRequest", "x-xsrf-token": "EL1hfx1JJ9Z743JWhEn1pKrl"
-    }
-
-    query_params = {
+    }).query_params({
         'uid': '1712572452'
-    }
+    }).response()
 
-    response_object = UrlLibUtility.get(url=url, headers=headers, query_params=query_params)
     ILog.debug(__file__, response_object.get_dictionary())
 
 
 def __test_10():
-    # 微博cookie绕过登录下载详情页
-    url = "https://weibo.com/u/1712572452"
-
-    headers = {
-        "accept": "application/json, text/plain, */*",
-        # "accept-encoding": "gzip, deflate, br",
-        "accept-language": "zh-CN,zh;q=0.9,ko;q=0.8,zh-TW;q=0.7,en;q=0.6",
-        "client-version": "v2.34.76",
-        "cookie": "login_sid_t=dad79da3fddc0e3fa0f92ea665ee873e; cross_origin_proto=SSL; "
-                  "_s_tentry=passport.weibo.com; Apache=2763422235674.613.1652751815618; "
-                  "SINAGLOBAL=2763422235674.613.1652751815618; "
-                  "ULV=1652751815621:1:1:1:2763422235674.613.1652751815618:; "
-                  "WBtopGlobal_register_version=2022051709; SSOLoginState=1652751840; "
-                  "XSRF-TOKEN=EL1hfx1JJ9Z743JWhEn1pKrl; "
-                  "SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KMhUgL"
-                  ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; "
-                  "YF-V-WEIBO-G0=b09171a17b2b5a470c42e2f713edace0; "
-                  "SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv99eiwJLsTrJAeeltV3BTFTprdEDgOmKIMmQd21qlfYQvE"
-                  ".; SUB=_2A25P6LVeDeRhGeVM61IX9i7Lwz6IHXVsn6GWrDV8PUNbmtAfLVjAkW9NTMKiQS3kzMBzozt"
-                  "-dzjsfYS1pN_HEIEM; ALF=1691220109; "
-                  "WBPSESS=s-0NQ4M0QVQpcAEHgxJPBrcZKtb9tN3_hCT0PgdZ2KV-Aw1SBjKwWG3ZPu"
-                  "-q9ekbTW37V9ll6dvnBTDrDnPxMc6JPmwh9vRwUg1MZ2h7yyqL7YtMvI8vZYpOc6-qBHvOdICVIjRX"
-                  "-G1HfgdURmsZnA==",
-        "referer": "https://weibo.com/",
-        "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
-        "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"macOS\"", "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors", "sec-fetch-site": "same-origin", "server-version": "v2022.08.03.1",
-        "traceparent": "00-a2d193708e0b0be2b9d887077134039a-074b1727632d0d45-00",
-        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
-                      "Chrome/104.0.0.0 Safari/537.36",
-        "x-requested-with": "XMLHttpRequest", "x-xsrf-token": "EL1hfx1JJ9Z743JWhEn1pKrl"
-    }
-
-    response_object = UrlLibUtility.get(url=url, headers=headers)
-    ILog.debug(__file__, response_object.get_dictionary())
-
-
-def __test_11():
     # 使用代理
     # 代理的协议要和url的协议一致才行！ http 需要 http 代理， https 需要 https 代理
-    url = "https://httpbin.org/get"
 
-    headers = {
+    response_object = UrlLibWrapper().url('https://httpbin.org/get').headers({
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/104.0.0.0 Safari/537.36"
-    }
+    }).proxies(ProxiesUtility.get_ssl_proxy().to_proxy_dict()).response()
 
-    proxies_poor = [
-        {
-            'https': '125.21.3.41:8080'
-        }
-    ]
-
-    proxies = random.choice(proxies_poor)
-
-    response_object = UrlLibUtility.get(url, headers=headers, proxies=proxies)
     ILog.debug(__file__, response_object.get_dictionary())
 
 
@@ -380,6 +320,5 @@ if __name__ == '__main__':
     # __test_6()
     # __test_7()
     # __test_8()
-    __test_9()
-    # __test_10()
-    # __test_11()
+    # __test_9()
+    __test_10()
