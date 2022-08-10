@@ -150,7 +150,7 @@ class UrlLibWrapper:
             message: HTTPMessage = results[1]
 
             process_time = f'{int((time.time() - t) * 1000)}ms'
-            response_object: ResponseObject = ResponseObject(data=file_name, code=0, process_time=process_time,
+            response_object: ResponseObject = ResponseObject(data=file_name, code=200, process_time=process_time,
                                                              url=self.__url, message=str(message), error='')
 
         except HTTPError as e:

@@ -3,14 +3,11 @@
 # @Author : Coding with cat
 # @File : selenium_demo
 # @Project : SHCrawler
-import time
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.remote.webelement import WebElement
 
+from framewrok.module.selenium_wrapper.selenium_wrapper import SeleniumWrapper
 from framewrok.utility.log_utility import ILog
 
 """
@@ -20,26 +17,16 @@ from framewrok.utility.log_utility import ILog
 
 
 def __test_1():
+    SeleniumWrapper().chrome_builder('https://www.jd.com') \
+        .builder_with_ui() \
+        .capture(file_name='jd.png', delay_sec=2) \
+        .get_page_source(__page_source) \
+        .quite(delay_sec=2)
 
-    # 京东例子
-    # 有些网站会检查浏览器，给出不完整的数据
-    option = webdriver.ChromeOptions()
-    option.add_experimental_option("detach", True)
 
-    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=option)
-
-    url = 'https://www.jd.com'
-    # url = 'https://www.baidu.com'
-    browser.get(url)
-
-    time.sleep(2)
-
-    content = browser.page_source
-    ILog.debug(__file__, content)
-
-    # close只会关闭当前页面，quit会退出驱动并且关闭所关联的所有窗口
-    # browser.close()
-    browser.quit()
+def __page_source(page_source):
+    ILog.debug(__file__, "__page_source")
+    ILog.debug(__file__, page_source)
 
 
 def __test_2():
@@ -48,139 +35,46 @@ def __test_2():
     # 2 输入'周杰伦'
     # 3 点击'百度一下'按钮
 
-    option = webdriver.ChromeOptions()
-    option.add_experimental_option("detach", True)
-
-    chrome = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=option)
-
-    try:
-
-        url = 'https://www.baidu.com'
-        chrome.get(url)
-
-        time.sleep(2)
-
-        # content = browser.page_source
-        # ILog.debug(__file__, content)
-        """
-        ID = "id"
-        XPATH = "xpath"
-        LINK_TEXT = "link text"
-        PARTIAL_LINK_TEXT = "partial link text"
-        NAME = "name"
-        TAG_NAME = "tag name"
-        CLASS_NAME = "class name"
-        CSS_SELECTOR = "css selector"
-        """
-        # 根据id
-        button_by_id = chrome.find_element(by=By.ID, value='su')
-        ILog.debug(__file__, button_by_id)
-        ILog.debug(__file__, button_by_id.get_attribute('class'))
-        ILog.debug(__file__, button_by_id.tag_name)
-        ILog.debug(__file__, button_by_id.get_attribute('value'))
-
-        # 根据xpath
-        button_by_xpath = chrome.find_element(by=By.XPATH, value='//input[@id="su"]')
-        # ILog.debug(__file__, button_by_xpath)
-
-        # 根据name
-        input_text = chrome.find_element(by=By.NAME, value='wd')
-        # ILog.debug(__file__, input_text)
-
-        # 根据标签
-        inputs = chrome.find_elements(by=By.TAG_NAME, value='input')
-        # ILog.debug(__file__, inputs)
-
-        input_text.send_keys('周杰伦')
-
-        time.sleep(2)
-
-        button_by_id.click()
-
-        time.sleep(2)
-
-        js_scroll_to_bottom = "document.documentElement.scrollTop=100000"
-        chrome.execute_script(js_scroll_to_bottom)
-
-        time.sleep(2)
-
-        next_button_by_xpath = chrome.find_element(by=By.XPATH, value='//a[@class="n"]')
-        next_button_by_xpath.click()
-
-        time.sleep(2)
-
-        chrome.execute_script(js_scroll_to_bottom)
-
-        time.sleep(2)
-
-        chrome.back()
-
-        time.sleep(2)
-
-        chrome.forward()
-
-        chrome.execute_script(js_scroll_to_bottom)
-
-        time.sleep(2)
-
-    except Exception as e:
-        ILog.debug(__file__, str(e))
-    finally:
-        # close只会关闭当前页面，quit会退出驱动并且关闭所关联的所有窗口
-        # browser.close()
-        chrome.quit()
+    SeleniumWrapper().chrome_builder('https://www.baidu.com').builder_with_ui() \
+        .get_page_source(__page_source).capture('baidu.png', delay_sec=2) \
+        .input_text(by=By.NAME, value='wd', content='周杰伦', delay_sec=2) \
+        .click_button(by=By.ID, value='su', delay_sec=2) \
+        .scroll_to_bottom(delay_sec=2) \
+        .click_button(by=By.XPATH, value='//a[@class="n"]', delay_sec=2) \
+        .back(delay_sec=2) \
+        .forward(delay_sec=2) \
+        .scroll_to_bottom(delay_sec=2) \
+        .scroll_to_top(delay_sec=2) \
+        .quite(delay_sec=2)
 
 
 def __test_3():
     # 无界面浏览器
 
-    options = Options()
-    options.headless = True
+    SeleniumWrapper().chrome_builder('https://www.baidu.com') \
+        .builder_none_ui(google_chrome_path='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome') \
+        .capture(file_name='baidu.png', delay_sec=2) \
+        .get_page_source(__page_source) \
+        .quite(delay_sec=2)
 
-    options.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 
-    options.add_experimental_option("detach", True)
+def __test_4():
+    SeleniumWrapper().chrome_builder('https://www.baidu.com') \
+        .builder_with_ui() \
+        .click_button(by=By.ID, value='su', delay_sec=2, on_web_element=__on_web_element) \
+        .quite(delay_sec=2)
 
-    chrome = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-    try:
-
-        url = 'https://www.baidu.com'
-        chrome.get(url)
-
-        time.sleep(2)
-
-        chrome.save_screenshot('baidu.png')
-        # content = browser.page_source
-        # ILog.debug(__file__, content)
-        """
-        ID = "id"
-        XPATH = "xpath"
-        LINK_TEXT = "link text"
-        PARTIAL_LINK_TEXT = "partial link text"
-        NAME = "name"
-        TAG_NAME = "tag name"
-        CLASS_NAME = "class name"
-        CSS_SELECTOR = "css selector"
-        """
-        # 根据id
-        button_by_id = chrome.find_element(by=By.ID, value='su')
-        ILog.debug(__file__, button_by_id)
-        ILog.debug(__file__, button_by_id.get_attribute('class'))
-        ILog.debug(__file__, button_by_id.tag_name)
-        ILog.debug(__file__, button_by_id.get_attribute('value'))
-
-        time.sleep(2)
-
-    except Exception as e:
-        ILog.debug(__file__, str(e))
-    finally:
-        # close只会关闭当前页面，quit会退出驱动并且关闭所关联的所有窗口
-        # browser.close()
-        chrome.quit()
+def __on_web_element(web_element: WebElement):
+    ILog.debug(__file__, "__on_web_element")
+    ILog.debug(__file__, web_element)
+    ILog.debug(__file__, web_element.get_attribute('class'))
+    ILog.debug(__file__, web_element.tag_name)
+    ILog.debug(__file__, web_element.get_attribute('value'))
 
 
 if __name__ == '__main__':
     # __test_1()
     # __test_2()
-    __test_3()
+    # __test_3()
+    __test_4()
