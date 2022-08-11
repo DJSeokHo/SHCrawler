@@ -4,9 +4,9 @@
 # @File : request_demo
 # @Project : SHCrawler
 
-import requests
 from bs4 import BeautifulSoup
 
+from framewrok.module.http.requests_wrapper.requests_wrapper import RequestsWrapper
 from framewrok.utility.auth_code_utility import AuthCodeUtility
 from framewrok.utility.json_utility import JSONUtility
 from framewrok.utility.log_utility import ILog
@@ -14,52 +14,34 @@ from framewrok.utility.proxies_utility import ProxiesUtility
 
 
 def __test_1():
-    url = 'https://www.baidu.com'
 
-    response = requests.get(url=url)
-    response.encoding = 'utf-8'
-
-    ILog.debug(__file__, type(response))
-    ILog.debug(__file__, f'1 {response.text}')  # 网页的源码字符串
-    ILog.debug(__file__, f'2 {response.url}')
-    ILog.debug(__file__, f'3 {response.content}')  # 返回网页的二进制
-    ILog.debug(__file__, f'4 {response.status_code}')
-    ILog.debug(__file__, f'5 {response.headers}')
+    response_object = RequestsWrapper().url('https://www.baidu.com').proxies(ProxiesUtility.get_ssl_proxy()).get()
+    ILog.debug(__file__, response_object.get_dictionary())
 
 
 def __test_2():
-    url = 'https://www.baidu.com/s'
 
-    headers = {
+    response_object = RequestsWrapper().url('https://www.baidu.com/s').headers({
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/104.0.0.0 Safari/537.36 '
-    }
-
-    query_params = {
+    }).query_params({
         'wd': '周杰伦'
-    }
+    }).get()
 
-    response = requests.get(url=url, params=query_params, headers=headers,
-                            proxies=ProxiesUtility.get_ssl_proxy().to_proxy_dict())
-    ILog.debug(__file__, response.text)
+    ILog.debug(__file__, response_object.get_dictionary())
 
 
 def __test_3():
 
-    url = 'https://fanyi.baidu.com/sug'
-
-    headers = {
+    response_object = RequestsWrapper().url('https://fanyi.baidu.com/sug').headers({
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/104.0.0.0 Safari/537.36 '
-    }
-
-    form_datas = {
+    }).form_datas({
         'kw': 'hello'
-    }
+    }).post()
 
-    response = requests.post(url=url, data=form_datas, headers=headers)
-
-    ILog.debug(__file__, JSONUtility.to_json_object(response.text).get("data"))
+    # ILog.debug(__file__, response_object.get_dictionary())
+    ILog.debug(__file__, JSONUtility.to_json_object(response_object.get_data()).get("data"))
 
 
 def __test_4():
@@ -79,22 +61,17 @@ def __test_4():
     验证码怎么识别？
     """
 
-    url = 'https://so.gushiwen.cn/user/login.aspx?from=http://so.gushiwen.cn/user/collect.aspx'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
-                      'Chrome/104.0.0.0 Safari/537.36 '
-    }
-
     # 这里有坑，是无论如何都无法登录的，因为你之前打开了网页，下载了验证码，然后这里再发起一次登录的话，相当于第二次打开网页，那么肯定是新的验证码。
     # 存储的是之前的验证码，所以肯定无法打开。怎么办？ session 了解一下。
-    # response = requests.post(url=url, headers=headers)
+    wrapper = RequestsWrapper()\
+        .url('https://so.gushiwen.cn/user/login.aspx?from=http://so.gushiwen.cn/user/collect.aspx').headers({
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/104.0.0.0 Safari/537.36 '
+        }).session(True)
 
-    session = requests.session()
-    response = session.post(url=url, headers=headers)
-    # session 访问登录页获取信息
-
-    ILog.debug(__file__, response)
-    soup = BeautifulSoup(response.text, 'html5lib')
+    response_object = wrapper.post()
+    ILog.debug(__file__, response_object.get_dictionary())
+    soup = BeautifulSoup(response_object.get_data(), 'html5lib')
 
     view_state = soup.select('#__VIEWSTATE')[0].attrs.get('value')
     view_state_generator = soup.select('#__VIEWSTATEGENERATOR')[0].attrs.get('value')
@@ -106,16 +83,11 @@ def __test_4():
     code_image_url = f'https://so.gushiwen.cn{code_image}'
 
     # session 访问登录页下载验证码图片
-    code_response = session.get(code_image_url)
-    code_content = code_response.content
-
-    with open('image_code.jpg', 'wb') as fp:
-        fp.write(code_content)
-
+    wrapper.download(url=code_image_url, file_name='image_code.jpg')
     res = AuthCodeUtility.auth_code_ocr('image_code.jpg')
     ILog.debug(__file__, res)
 
-    form_datas = {
+    wrapper.form_datas({
         '__VIEWSTATE': view_state,
         '__VIEWSTATEGENERATOR': view_state_generator,
         'from': 'http://so.gushiwen.cn/user/collect.aspx',
@@ -123,15 +95,14 @@ def __test_4():
         'pwd': 'qwer1234',
         'code': res,
         'denglu': '登录'
-    }
+    })
 
-    # response = requests.post(url=url, data=form_datas, headers=headers)
-    response = session.post(url=url, data=form_datas, headers=headers)
     # session 访问登录页进行登录
+    response_object = wrapper.post()
 
-    ILog.debug(__file__, response.text)
+    ILog.debug(__file__, response_object.get_dictionary())
     with open('gushiwen.html', 'w', encoding='utf-8') as fp:
-        fp.write(response.text)
+        fp.write(response_object.get_data())
 
 
 if __name__ == '__main__':

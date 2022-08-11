@@ -6,7 +6,7 @@
 
 from bs4 import BeautifulSoup
 
-from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
+from framewrok.module.http.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 from framewrok.utility.log_utility import ILog
 from framewrok.utility.proxies_utility import ProxiesUtility
 
@@ -89,7 +89,7 @@ def __test_2():
         "Upgrade-Insecure-Requests": "1",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/104.0.0.0 Safari/537.36"
-    }).proxies(ProxiesUtility.get_ssl_proxy().to_proxy_dict()).response()
+    }).proxies(ProxiesUtility.get_ssl_proxy()).response()
     '''
     网站采取了强缓存验证， 服务器将要爬取的内容在本地做了缓存，
     再次请求的时候，会首先检查本地缓存中是否已存在，如果有就返回304

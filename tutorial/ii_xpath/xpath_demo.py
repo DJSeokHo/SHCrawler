@@ -6,10 +6,9 @@
 
 from lxml import etree
 
-from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
+from framewrok.module.http.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 from framewrok.utility.json_utility import JSONUtility
 from framewrok.utility.log_utility import ILog
-from framewrok.utility.proxies_utility import ProxiesUtility
 
 '''
 xpath 基本语法

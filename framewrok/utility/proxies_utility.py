@@ -7,7 +7,7 @@ import random
 
 from bs4 import BeautifulSoup
 
-from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
+from framewrok.module.http.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 
 
 class ProxyModel:
@@ -37,8 +37,13 @@ class ProxyModel:
 
     def to_proxy_dict(self) -> dict:
 
+        if self.__https == 'yes':
+            protocol = 'https'
+        else:
+            protocol = 'http'
+
         return {
-            'https': f'{self.__ip}:{self.__port}'
+            protocol: f'{self.__ip}:{self.__port}'
         }
 
 
@@ -80,7 +85,7 @@ class ProxiesUtility:
             )
 
             if proxy_model.get_anonymity() == 'elite proxy' or proxy_model.get_anonymity() == 'anonymous':
-                proxies.append(proxy_model)
+                proxies.append(proxy_model.to_proxy_dict())
 
         return random.choice(proxies)
 

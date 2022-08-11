@@ -5,7 +5,7 @@
 # @Project : SHCrawler
 import time
 
-from framewrok.module.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
+from framewrok.module.http.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 from framewrok.utility.json_utility import JSONUtility
 from framewrok.utility.log_utility import ILog
 from framewrok.utility.proxies_utility import ProxiesUtility
@@ -305,7 +305,7 @@ def __test_10():
     response_object = UrlLibWrapper().url('https://httpbin.org/get').headers({
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/104.0.0.0 Safari/537.36"
-    }).proxies(ProxiesUtility.get_ssl_proxy().to_proxy_dict()).response()
+    }).proxies(ProxiesUtility.get_ssl_proxy()).response()
 
     ILog.debug(__file__, response_object.get_dictionary())
 
