@@ -108,7 +108,11 @@ class UrlLibWrapper:
                                              proxy=str(self.__proxies), error=str(e))
         return response_object
 
-    def download(self, file_name: str) -> ResponseObject:
+    def download(self, file_name: str, just_download: bool = False) -> ResponseObject:
+
+        if just_download:
+            urllib.request.urlretrieve(self.__url, file_name)
+            return ResponseObject(data='', code=0, process_time='', url='', proxy='', message='', error='')
 
         t = time.time()
         response_object: ResponseObject

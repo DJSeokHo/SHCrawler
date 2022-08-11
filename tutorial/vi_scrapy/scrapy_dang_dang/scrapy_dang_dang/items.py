@@ -9,6 +9,7 @@ import scrapy
 class ScrapyDangDangItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    uuid = scrapy.Field()
     src = scrapy.Field()  # 图片
     name = scrapy.Field()  # 名字
     price = scrapy.Field()  # 价格

@@ -64,6 +64,7 @@ ROBOTSTXT_OBEY = False
 ITEM_PIPELINES = {
     # 管道可以有很多个，管道是有优先级的，优先级范围是 1-1000 值越小 优先级越高
     'scrapy_dang_dang.pipelines.ScrapyDangDangPipeline': 300,
+    'scrapy_dang_dang.pipelines.ScrapyDangDangDownloadPipeline': 301,  # 自定义的管道
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

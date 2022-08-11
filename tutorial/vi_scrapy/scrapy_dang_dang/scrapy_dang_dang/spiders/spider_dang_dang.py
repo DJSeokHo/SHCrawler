@@ -3,6 +3,7 @@ from scrapy import cmdline, Selector
 from scrapy.http import HtmlResponse
 
 from framewrok.utility.log_utility import ILog
+from framewrok.utility.uuid_utility import UUIDUtility
 from tutorial.vi_scrapy.scrapy_dang_dang.scrapy_dang_dang.items import ScrapyDangDangItem
 
 
@@ -41,7 +42,7 @@ class SpiderDangDangSpider(scrapy.Spider):
             ILog.debug(__file__, f'{src} {name} {price}')
 
             # 生成item
-            book = ScrapyDangDangItem(src=src, name=name, price=price)
+            book = ScrapyDangDangItem(uuid=UUIDUtility.get_uuid(), src=src, name=name, price=price)
 
             # 交给 pipeline 去下载
             yield book  # 立即返回一个生成的book, 也可以用列表添加起来返回一个列表，但是这里在遍历中，我要立即返回一个 item
