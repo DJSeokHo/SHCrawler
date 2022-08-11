@@ -6,7 +6,7 @@
 import scrapy
 
 
-class DemoItem(scrapy.Item):
+class ScrapyTc58Item(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
