@@ -6,9 +6,6 @@
 
 # useful for handling different item types with a single interface
 import os
-from io import TextIOWrapper
-
-from itemadapter import ItemAdapter
 
 from framewrok.module.http.url_lib_wrapper.url_lib_wrapper import UrlLibWrapper
 from framewrok.utility.log_utility import ILog

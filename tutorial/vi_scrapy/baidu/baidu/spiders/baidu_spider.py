@@ -22,6 +22,4 @@ class BaiduSpiderSpider(scrapy.Spider):
 
 
 if __name__ == '__main__':
-
-    args = f'scrapy crawl {BaiduSpiderSpider.name}'.split()
-    cmdline.execute(args)
+    cmdline.execute(f'scrapy crawl {BaiduSpiderSpider.name}'.split())

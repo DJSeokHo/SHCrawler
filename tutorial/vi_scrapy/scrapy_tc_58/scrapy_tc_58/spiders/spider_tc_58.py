@@ -29,5 +29,4 @@ class SpiderTc58Spider(scrapy.Spider):
 
 
 if __name__ == '__main__':
-    args = f'scrapy crawl {SpiderTc58Spider.name}'.split()
-    cmdline.execute(args)
+    cmdline.execute(f'scrapy crawl {SpiderTc58Spider.name}'.split())

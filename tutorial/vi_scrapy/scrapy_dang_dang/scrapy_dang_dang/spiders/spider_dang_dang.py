@@ -9,8 +9,14 @@ from tutorial.vi_scrapy.scrapy_dang_dang.scrapy_dang_dang.items import ScrapyDan
 
 class SpiderDangDangSpider(scrapy.Spider):
     name = 'spider_dang_dang'
-    allowed_domains = ['http://category.dangdang.com/cp01.01.02.00.00.00.html']
-    start_urls = ['http://category.dangdang.com/cp01.01.02.00.00.00.html']
+    allowed_domains = ['category.dangdang.com']  # 注意，这个范围需要修改，一般只写域名
+    start_urls = ['http://category.dangdang.com/pg1-cp01.01.02.00.00.00.html']
+
+    # https://category.dangdang.com/pg1-cp01.01.02.00.00.00.html
+    # https://category.dangdang.com/pg2-cp01.01.02.00.00.00.html
+
+    base_url = 'https://category.dangdang.com/pg'
+    page = 1
 
     def parse(self, response):
 
@@ -46,6 +52,15 @@ class SpiderDangDangSpider(scrapy.Spider):
 
             # 交给 pipeline 去下载
             yield book  # 立即返回一个生成的book, 也可以用列表添加起来返回一个列表，但是这里在遍历中，我要立即返回一个 item
+
+        # 继续爬取
+        if self.page < 2:
+            self.page = self.page + 1
+
+            url = f'{self.base_url}{self.page}-cp01.01.02.00.00.00.html'
+
+            # 更改页码， 继续爬新的一页
+            yield scrapy.Request(url=url, callback=self.parse)
 
 
 if __name__ == '__main__':

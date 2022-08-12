@@ -26,5 +26,4 @@ class SpiderCarHomeSpider(scrapy.Spider):
 
 
 if __name__ == '__main__':
-    args = f'scrapy crawl {SpiderCarHomeSpider.name}'.split()
-    cmdline.execute(args)
+    cmdline.execute(f'scrapy crawl {SpiderCarHomeSpider.name}'.split())
