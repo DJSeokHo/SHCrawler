@@ -14,6 +14,8 @@ class SpiderDangDangSpider(scrapy.Spider):
 
     # https://category.dangdang.com/pg1-cp01.01.02.00.00.00.html
     # https://category.dangdang.com/pg2-cp01.01.02.00.00.00.html
+    # https://category.dangdang.com/pg3-cp01.01.02.00.00.00.html
+    # https://category.dangdang.com/pg4-cp01.01.02.00.00.00.html
 
     base_url = 'https://category.dangdang.com/pg'
     page = 1
@@ -53,7 +55,7 @@ class SpiderDangDangSpider(scrapy.Spider):
             # 交给 pipeline 去下载
             yield book  # 立即返回一个生成的book, 也可以用列表添加起来返回一个列表，但是这里在遍历中，我要立即返回一个 item
 
-        # 继续爬取
+        # 继续爬取 # 最大可以是100
         if self.page < 2:
             self.page = self.page + 1
 
