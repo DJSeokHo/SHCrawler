@@ -1,4 +1,4 @@
-# Scrapy settings for scrapy_dushu project
+# Scrapy settings for scrapy_proxy project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,30 +7,16 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapy_dushu'
+BOT_NAME = 'scrapy_proxy'
 
-SPIDER_MODULES = ['scrapy_dushu.spiders']
-NEWSPIDER_MODULE = 'scrapy_dushu.spiders'
-
-# 制定日志级别
-# 由高到低是
-# CRITICAL: 严重错误
-# ERROR: 一般错误
-# WARNING:  警告信息
-# INFO:  一般信息
-# DEBUG: 调试信息
-# 如果选择一项，那么该项以上的将全部显示
-# 默认是 DEBUG
-LOG_LEVEL = 'DEBUG'
-
-# 制定日志输出文件 不指定的话就在log窗输出 最好有
-# LOG_FILE = 'log_test.log'
+SPIDER_MODULES = ['scrapy_proxy.spiders']
+NEWSPIDER_MODULE = 'scrapy_proxy.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'scrapy_dushu (+http://www.yourdomain.com)'
+# USER_AGENT = 'scrapy_proxy (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -58,13 +44,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'scrapy_dushu.middlewares.ScrapyDushuSpiderMiddleware': 543,
+#    'scrapy_proxy.middlewares.ScrapyProxySpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'scrapy_dushu.middlewares.ScrapyDushuDownloaderMiddleware': 543,
+#    'scrapy_proxy.middlewares.ScrapyProxyDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -75,10 +61,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'scrapy_dushu.pipelines.ScrapyDushuPipeline': 300,
-    'scrapy_dushu.pipelines.ScrapyDushuSQLitePipeline': 301,
-}
+# ITEM_PIPELINES = {
+#    'scrapy_proxy.pipelines.ScrapyProxyPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
