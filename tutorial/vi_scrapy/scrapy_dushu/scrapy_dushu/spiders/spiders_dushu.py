@@ -7,6 +7,11 @@ from framewrok.utility.log_utility import ILog
 from framewrok.utility.uuid_utility import UUIDUtility
 from tutorial.vi_scrapy.scrapy_dushu.scrapy_dushu.items import ScrapyDushuItem
 
+"""
+如何建立一个带链接提取器的爬虫？
+scrapy genspider -t crawl spider_name target_site_url
+"""
+
 
 class SpidersDushuSpider(CrawlSpider):
     name = 'spiders_dushu'
@@ -20,7 +25,7 @@ class SpidersDushuSpider(CrawlSpider):
                 # restrict_xpaths=r''
             ),
             callback='parse_item',
-            follow=False),
+            follow=True),  # 如果是 True，就自动翻页，按照制定的链接规则一直跟进翻页。如果是False，就只爬初始时加载的页码
     )
 
     def parse_item(self, response):
