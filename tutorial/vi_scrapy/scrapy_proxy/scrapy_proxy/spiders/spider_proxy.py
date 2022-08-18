@@ -12,10 +12,11 @@ class SpiderProxySpider(scrapy.Spider):
     # start_urls = ['http://icanhazip.com']
     start_urls = ['https://icanhazip.com']
 
-    # 设置代理
+    # 设置代理 也可以在 middlewares 里面设置，这样的话所有的爬虫都可以用
     def start_requests(self):
-        proxy = ProxiesUtility.get_ssl_proxy_string()
-        yield scrapy.Request(self.start_urls[0], meta={"proxy": proxy})
+        # proxy = ProxiesUtility.get_ssl_proxy_string()
+        # yield scrapy.Request(self.start_urls[0], meta={"proxy": proxy})
+        yield scrapy.Request(self.start_urls[0])
 
     def parse(self, response):
 

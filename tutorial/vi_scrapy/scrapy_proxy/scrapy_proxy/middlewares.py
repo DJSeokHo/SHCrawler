@@ -8,6 +8,9 @@ from scrapy import signals
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
+from framewrok.utility.log_utility import ILog
+from framewrok.utility.proxies_utility import ProxiesUtility
+
 
 class ScrapyProxySpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
@@ -101,3 +104,11 @@ class ScrapyProxyDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class ProxyMiddleware(object):
+
+    def process_request(self, request, spider):
+        proxy = ProxiesUtility.get_ssl_proxy_string()
+        request.meta['proxy'] = proxy
+        ILog.debug(__file__, f'proxy is {proxy}')
