@@ -310,6 +310,30 @@ def __test_10():
     ILog.debug(__file__, response_object.get_dictionary())
 
 
+def __test_11():
+    # 微博搜索页
+    response_object = UrlLibWrapper().url('https://s.weibo.com/weibo').headers(
+        {
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            # "accept-encoding": "gzip, deflate, br",
+            "accept-language": "zh-CN,zh;q=0.9,ko;q=0.8,zh-TW;q=0.7,en;q=0.6",
+            "cookie": "login_sid_t=dad79da3fddc0e3fa0f92ea665ee873e; cross_origin_proto=SSL; _s_tentry=passport.weibo.com; Apache=2763422235674.613.1652751815618; SINAGLOBAL=2763422235674.613.1652751815618; ULV=1652751815621:1:1:1:2763422235674.613.1652751815618:; SSOLoginState=1652751840; ALF=1692366456; SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv99JxUiwdKQH39n7EoAUChtd73IcbjVpyv_Y9gmk_oBKU4.; SUB=_2A25P-jKqDeRhGeVM61IX9i7Lwz6IHXVsjiNirDV8PUNbmtAfLVXukW9NTMKiQR1PJ0nwGJD-4FHdOB3ztmx7ymDd; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KzhUgL.FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt",
+            "referer": "https://s.weibo.com/weibo?q=%E5%A5%87%E6%80%AA%E7%9A%84%E5%BE%8B%E5%B8%88%E7%A6%B9%E8%8B%B1%E9%9B%A8",
+            "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
+            "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": "\"macOS\"", "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate", "sec-fetch-site": "same-origin", "sec-fetch-user": "?1",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
+        }
+    ).query_params(
+        {
+            'q': '奇怪的律师禹英雨'
+        }
+    ).response()
+
+    ILog.debug(__file__, response_object.get_dictionary())
+
+
 if __name__ == '__main__':
     # header 里有个 referer，用途是防盗链，如果你的当前访问不是通过referer进来的，那么就会出错
     # __test_1()
@@ -321,4 +345,5 @@ if __name__ == '__main__':
     # __test_7()
     # __test_8()
     # __test_9()
-    __test_10()
+    # __test_10()
+    __test_11()

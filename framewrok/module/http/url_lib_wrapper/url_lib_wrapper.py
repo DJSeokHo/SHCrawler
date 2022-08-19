@@ -137,3 +137,7 @@ class UrlLibWrapper:
                                              proxy=str(self.__proxies), error=e.reason)
 
         return response_object
+
+    @staticmethod
+    def encode(query_params) -> str:
+        return urllib.parse.urlencode(query_params, encoding='utf-8')

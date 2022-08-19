@@ -2,7 +2,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
+import os
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
@@ -58,7 +58,7 @@ class ScrapyDushuSQLitePipeline:
         """
         ILog.debug(__file__, 'open_spider')
 
-        SQLiteWrapper.instance().open(db_folder='database', db_path='database/dushu.sqlite3')
+        SQLiteWrapper.instance().open(db_folder='database', db_path=os.path.join("database", "dushu.sqlite3"))
 
         sql = '''
             CREATE TABLE IF NOT EXISTS 'BOOK_TABLE' ( \
