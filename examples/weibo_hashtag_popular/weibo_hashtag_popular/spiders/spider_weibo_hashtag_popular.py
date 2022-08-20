@@ -104,15 +104,15 @@ class SpiderWeiboHashtagPopularSpider(scrapy.Spider):
                       "*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             # "accept-encoding": "gzip, deflate, br",
             "accept-language": "zh-CN,zh;q=0.9,ko;q=0.8,zh-TW;q=0.7,en;q=0.6",
-            "cookie": "login_sid_t=dad79da3fddc0e3fa0f92ea665ee873e; cross_origin_proto=SSL; "
-                      "_s_tentry=passport.weibo.com; Apache=2763422235674.613.1652751815618; "
-                      "SINAGLOBAL=2763422235674.613.1652751815618; "
-                      "ULV=1652751815621:1:1:1:2763422235674.613.1652751815618:; SSOLoginState=1652751840; "
-                      "ALF=1692366456; "
-                      "SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv99JxUiwdKQH39n7EoAUChtd73IcbjVpyv_Y9gmk_oBKU4.; "
-                      "SUB=_2A25P-jKqDeRhGeVM61IX9i7Lwz6IHXVsjiNirDV8PUNbmtAfLVXukW9NTMKiQR1PJ0nwGJD-4FHdOB3ztmx7ymDd"
-                      "; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KzhUgL"
-                      ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt",
+            "cookie": "SINAGLOBAL=252500759357.11935.1616336286751; _ga=GA1.2.2062826145.1616336294; "
+                      "UOR=www.google.com,weibo.com,m.baidu.com; PC_TOKEN=36e4a196ac; "
+                      "SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KMhUgL"
+                      ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; ALF=1692515144; "
+                      "SSOLoginState=1660979146; "
+                      "SCF=Ak1mJrUlfI-dxrFreZ-sVA_1l8PDPk79h3HVfnzYNxNWAHZ9_BDxU-64mzP_tBRxB79pjJ1uFcQ0bVosFBRFXKM.; "
+                      "SUB=_2A25OBPebDeRhGeVM61IX9i7Lwz6IHXVtcG5TrDV8PUNbmtAfLRbfkW9NTMKiQXsFuyFSqLwMxJDB9SJra4Xv2yR6"
+                      "; _s_tentry=weibo.com; Apache=5107019318803.097.1660979170589; "
+                      "ULV=1660979170736:32:1:1:5107019318803.097.1660979170589:1654305540523",
             "referer": referer,
             "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
             "sec-ch-ua-mobile": "?0",
