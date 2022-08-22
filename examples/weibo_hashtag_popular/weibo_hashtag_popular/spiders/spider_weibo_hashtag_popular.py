@@ -104,15 +104,18 @@ class SpiderWeiboHashtagPopularSpider(scrapy.Spider):
                       "*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             # "accept-encoding": "gzip, deflate, br",
             "accept-language": "zh-CN,zh;q=0.9,ko;q=0.8,zh-TW;q=0.7,en;q=0.6",
-            "cookie": "SINAGLOBAL=252500759357.11935.1616336286751; _ga=GA1.2.2062826145.1616336294; "
-                      "UOR=www.google.com,weibo.com,m.baidu.com; PC_TOKEN=36e4a196ac; "
-                      "SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KMhUgL"
-                      ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; ALF=1692515144; "
-                      "SSOLoginState=1660979146; "
-                      "SCF=Ak1mJrUlfI-dxrFreZ-sVA_1l8PDPk79h3HVfnzYNxNWAHZ9_BDxU-64mzP_tBRxB79pjJ1uFcQ0bVosFBRFXKM.; "
-                      "SUB=_2A25OBPebDeRhGeVM61IX9i7Lwz6IHXVtcG5TrDV8PUNbmtAfLRbfkW9NTMKiQXsFuyFSqLwMxJDB9SJra4Xv2yR6"
-                      "; _s_tentry=weibo.com; Apache=5107019318803.097.1660979170589; "
-                      "ULV=1660979170736:32:1:1:5107019318803.097.1660979170589:1654305540523",
+            "cookie": "login_sid_t=dad79da3fddc0e3fa0f92ea665ee873e; cross_origin_proto=SSL; "
+                      "_s_tentry=passport.weibo.com; Apache=2763422235674.613.1652751815618; "
+                      "SINAGLOBAL=2763422235674.613.1652751815618; "
+                      "ULV=1652751815621:1:1:1:2763422235674.613.1652751815618:; "
+                      "WBtopGlobal_register_version=2022051709; SSOLoginState=1652751840; "
+                      "XSRF-TOKEN=EL1hfx1JJ9Z743JWhEn1pKrl; YF-V-WEIBO-G0=b09171a17b2b5a470c42e2f713edace0; "
+                      "SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv990QwpgEQWejGT2KtZyHDE3YkV9uG_TCiCl1vcjv3ZiCA.; "
+                      "SUB=_2A25OBpD4DeRhGeVM61IX9i7Lwz6IHXVtdYUwrDV8PUNbmtAfLXbfkW9NTMKiQWUn35-JKI4cdGEVwpUnuVDbrW1v"
+                      "; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KMhUgL"
+                      ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; ALF=1692668966; "
+                      "WBPSESS=s-0NQ4M0QVQpcAEHgxJPBrcZKtb9tN3_hCT0PgdZ2KV-Aw1SBjKwWG3ZPu"
+                      "-q9ekbTW37V9ll6dvnBTDrDnPxMSQ7CR5c5d4LstqlDxSCoD67crPMXjqceneSUEeJaRFR62iqEgZzy2-4PLpQIlzR1A==",
             "referer": referer,
             "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
             "sec-ch-ua-mobile": "?0",
