@@ -110,12 +110,12 @@ class SpiderWeiboHashtagPopularSpider(scrapy.Spider):
                       "ULV=1652751815621:1:1:1:2763422235674.613.1652751815618:; "
                       "WBtopGlobal_register_version=2022051709; SSOLoginState=1652751840; "
                       "XSRF-TOKEN=EL1hfx1JJ9Z743JWhEn1pKrl; YF-V-WEIBO-G0=b09171a17b2b5a470c42e2f713edace0; "
-                      "SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv990QwpgEQWejGT2KtZyHDE3YkV9uG_TCiCl1vcjv3ZiCA.; "
-                      "SUB=_2A25OBpD4DeRhGeVM61IX9i7Lwz6IHXVtdYUwrDV8PUNbmtAfLXbfkW9NTMKiQWUn35-JKI4cdGEVwpUnuVDbrW1v"
-                      "; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KMhUgL"
-                      ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; ALF=1692668966; "
-                      "WBPSESS=s-0NQ4M0QVQpcAEHgxJPBrcZKtb9tN3_hCT0PgdZ2KV-Aw1SBjKwWG3ZPu"
-                      "-q9ekbTW37V9ll6dvnBTDrDnPxMSQ7CR5c5d4LstqlDxSCoD67crPMXjqceneSUEeJaRFR62iqEgZzy2-4PLpQIlzR1A==",
+                      "SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WW9uubII4-Ou2jXh4f6QDNv5JpX5KMhUgL"
+                      ".FoeEeh5cSo5N1hz2dJLoIpUKHcHDdbH8SFHF1FHF1CH8SCHWSbHWxBtt; "
+                      "SCF=Aj6ZlH9rjOrnyy_1_9mZY0OFXtR53aVEAbaqEXcPSv99KgLcTt7VZdlCRwV8RPi5F0bmxS9LBApn6ZMgobUrXMw.; "
+                      "SUB=_2A25OA3FoDeRhGeVM61IX9i7Lwz6IHXVteeWgrDV8PUNbmtCOLWTnkW9NTMKiQQfuSEZhpiJkVR6i5eDGqR5oEn2G"
+                      "; ALF=1692939448; WBPSESS=s-0NQ4M0QVQpcAEHgxJPBrcZKtb9tN3_hCT0PgdZ2KV-Aw1SBjKwWG3ZPu"
+                      "-q9ekbTW37V9ll6dvnBTDrDnPxMczwhZVsO7Jlc3-RjDJFdLkOtr6LznTLvb7AsBGlecBvBQSFIOKM-gDj8FBRTk_ZUw==",
             "referer": referer,
             "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
             "sec-ch-ua-mobile": "?0",
